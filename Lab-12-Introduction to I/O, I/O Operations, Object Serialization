@@ -1,0 +1,168 @@
+Q1
+public class StringReversal {
+
+    // Method to reverse the words in the sentence
+    public static String reverseWordsWithCaseOption(String sentence, int caseOption) {
+        // Split the sentence into words based on spaces
+        String[] words = sentence.split(" ");
+        StringBuilder result = new StringBuilder();
+        
+        for (String word : words) {
+            // Reverse the word while handling punctuation
+            String reversedWord = reverseWordWithPunctuation(word);
+            
+            // If caseOption is 1, adjust the case
+            if (caseOption == 1) {
+                // Reverse the case and retain the position of the uppercase letters
+                reversedWord = reverseCaseAndRetainPosition(reversedWord, word);
+            }
+            
+            // Append the reversed word to the result, with a space between words
+            result.append(reversedWord).append(" ");
+        }
+        
+        // Remove the last trailing space and return the final result
+        return result.toString().trim();
+    }
+
+    // Method to reverse the word while handling punctuation correctly
+    private static String reverseWordWithPunctuation(String word) {
+        // Extract alphabetic characters only
+        String lettersOnly = word.replaceAll("[^a-zA-Z]", "");
+        // Reverse the alphabetic characters
+        String reversedLetters = new StringBuilder(lettersOnly).reverse().toString();
+        
+        // Rebuild the word with the reversed letters and original punctuation
+        StringBuilder finalWord = new StringBuilder();
+        int letterIndex = 0;
+        
+        // Traverse the original word to place the reversed letters and punctuation
+        for (int i = 0; i < word.length(); i++) {
+            char ch = word.charAt(i);
+            if (Character.isLetter(ch)) {
+                finalWord.append(reversedLetters.charAt(letterIndex++));  // Replace letter with reversed letter
+            } else {
+                finalWord.append(ch);  // Keep punctuation as it is
+            }
+        }
+        
+        return finalWord.toString();
+    }
+
+    // Method to reverse the case of the word while keeping the uppercase letters' position intact
+    private static String reverseCaseAndRetainPosition(String reversedWord, String originalWord) {
+        // Convert the original word to char array to track positions of uppercase letters
+        char[] originalChars = originalWord.toCharArray();
+        char[] reversedChars = reversedWord.toCharArray();
+        
+        for (int i = 0; i < originalChars.length; i++) {
+            // If the character in the original word is uppercase, keep it uppercase in the reversed word
+            if (Character.isUpperCase(originalChars[i])) {
+                reversedChars[i] = Character.toUpperCase(reversedChars[i]);
+            } else {
+                reversedChars[i] = Character.toLowerCase(reversedChars[i]);
+            }
+        }
+        
+        // Return the modified reversed word with correct case
+        return new String(reversedChars);
+    }
+
+    // Main method to test the function
+    public static void main(String[] args) {
+        String sentence1 = "Wipro Technologies Bangalore";
+        String sentence2 = "Wipro Technologies, Bangalore";
+        
+        // Test cases
+        System.out.println(reverseWordsWithCaseOption(sentence1, 0));  // Expected: "orpiW seigolonhceT erolagnaB"
+        
+        
+    }
+}
+Q2
+public class CommonAlphabetsSum {
+
+    // Function to find the single digit sum
+    public static int singleDigitSum(int sum) {
+        while (sum >= 10) {
+            int tempSum = 0;
+            // Add all digits of the sum
+            while (sum > 0) {
+                tempSum += sum % 10;
+                sum /= 10;
+            }
+            sum = tempSum; // Assign the new sum
+        }
+        return sum; // Return the single digit sum
+    }
+
+    // Function to calculate the final result
+    public static int getSingleDigitSumOfCommonASCII(char[] input1, char[] input2) {
+        // Find common alphabets
+        StringBuilder commonChars = new StringBuilder();
+        for (char c1 : input1) {
+            for (char c2 : input2) {
+                if (c1 == c2) {
+                    commonChars.append(c1);
+                    break;
+                }
+            }
+        }
+
+        // Calculate sum of ASCII values of common characters
+        int sum1 = 0;
+        for (int i = 0; i < commonChars.length(); i++) {
+            sum1 += (int) commonChars.charAt(i);
+        }
+
+        // Return the single digit sum of ASCII values
+        return singleDigitSum(sum1);
+    }
+
+    // Main function to test the logic
+    public static void main(String[] args) {
+        // Example 1: Test case
+        char[] input1 = {'a', 'b', 'c'};
+        char[] input2 = {'b', 'c'};
+
+        // Call the function and print the result
+        int result = getSingleDigitSumOfCommonASCII(input1, input2);
+        System.out.println(result);  // Expected Output: 8
+    }
+}
+Q3
+public class BinaryDecoder {
+
+    // Function to decode the binary sequence into a word
+    public static String decode(String binary) {
+        // Trim any leading/trailing spaces
+        binary = binary.trim();
+
+        // Split the input string using '1' as the delimiter
+        String[] parts = binary.split("1");
+
+        // StringBuilder to store the decoded word
+        StringBuilder decodedWord = new StringBuilder();
+
+        // For each part, which represents a letter, decode it
+        for (String part : parts) {
+            if (!part.isEmpty()) { // Ignore empty strings which result from consecutive '1's
+                int zeroCount = part.length(); // Count the number of 0's
+                // Mapping of the number of 0's to the corresponding letter
+                char letter = (char) ('A' + (26 - zeroCount)); // Calculate the letter
+                decodedWord.append(letter); // Append the letter to the result
+            }
+        }
+
+        // Return the decoded word
+        return decodedWord.toString();
+    }
+// Main function to test the logic
+    public static void main(String[] args) {
+        // Test Case 1
+        String input1 = "010010001";
+        System.out.println(decode(input1));  // Expected Output: ZYX
+
+    
+    }
+}
