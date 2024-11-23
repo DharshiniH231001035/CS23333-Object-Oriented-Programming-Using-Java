@@ -1,0 +1,153 @@
+Q1
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class NumberProcessor {
+    
+    public static int processNumbers(List<Integer> numbers) {
+        int totalSum = 0;
+
+        for (int i = 0; i < numbers.size(); i++) {
+            int num = numbers.get(i);
+            int digit;
+
+            // Extract the digit corresponding to the index
+            if (i >= String.valueOf(num).length()) {
+                digit = 0; // Treat as 0 if index exceeds the number of digits
+            } else {
+                digit = (num / (int) Math.pow(10, i)) % 10; // Get the digit
+            }
+
+            // If the digit is less than the index, treat it as 0
+            if (digit < i) {
+                digit = 0;
+            }
+
+            totalSum += digit * digit; // Square the digit and add to total
+        }
+
+        return totalSum;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        
+        int n = scanner.nextInt();
+        
+        List<Integer> inputNumbers = new ArrayList<>();
+
+        
+        for (int i = 0; i < n; i++) {
+            int num = scanner.nextInt();
+            inputNumbers.add(num);
+        }
+
+        int result = processNumbers(inputNumbers);
+        System.out.println( result);
+        
+        scanner.close();
+    }
+}
+Q2
+import java.util.Scanner;
+public class Longest{
+    public static void main(String args[]){
+        Scanner sc = new Scanner(System.in);
+        
+        int size =sc.nextInt();
+        int[] array = new int[size];
+        for (int i =0;i<size;i++){
+            array[i]= sc.nextInt();
+        }
+        int result=sum(array);
+        if(result>=150)
+        {result = result + 24;}
+        System.out.println(result);
+        sc.close();
+    }
+    public static int sum(int[]arr){
+        int maxSum=0;
+        int currentSum=0;
+        int maxLength=0;
+        int currentLength=0;
+        int maxNegative =Integer.MIN_VALUE;
+        
+        for(int num:arr){
+            if(num>0){
+                currentSum+=num;
+                currentLength++;
+            }
+            else{
+                if(currentLength>maxLength){
+                    maxLength=currentLength;
+                    maxSum=currentSum;
+                }
+                else if(currentLength == maxLength){
+                    maxSum=Math.max(maxSum,currentSum);
+                }
+                currentSum=0;
+                currentLength=0;
+            }
+            if(num<0){
+                maxNegative =Math.max(maxNegative,num);
+            }
+        }
+        if(currentLength>maxLength){
+            maxSum=currentSum;
+        }
+        else if (currentLength == maxLength){
+            maxSum=Math.max(maxSum,currentSum);
+        }
+        if(maxLength==0){
+            return maxNegative;
+    }
+        return maxSum;
+    
+}}
+Q3
+import java.util.Arrays;
+import java.util.Scanner;
+public class ArrayProcessor{
+    public static void main(String[]args){
+        Scanner scanner =new Scanner(System.in);
+        int size=scanner.nextInt();
+        
+        int[]array=new int[size];
+        
+        for(int i= 0;i<size;i++){
+            array[i]=scanner.nextInt();
+            
+        }
+        
+        int [] processedArray = processArray(array);
+        for(int num : processedArray){
+            System.out.print(num +" ");
+        }
+        System.out.println();
+        scanner.close();
+    }
+    public static int[] processArray(int[] arr){
+        if(arr == null||arr.length==0){
+            return new int[0];
+        }
+        
+        int maxNum =findMax(arr);
+        
+        int[] finalArray = new int[arr.length];
+        for(int i=0;i<arr.length;i++){
+            finalArray[i]=maxNum*(arr[i]-maxNum);
+        }
+        return finalArray;
+        }
+        private static int findMax(int[] arr){
+            int max =arr[0];
+            for(int num : arr){
+                if (num>max){
+                    max=num;
+                }
+            }
+         return max;
+        }
+    }
