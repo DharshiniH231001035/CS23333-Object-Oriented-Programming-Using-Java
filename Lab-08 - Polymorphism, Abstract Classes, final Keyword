@@ -1,0 +1,153 @@
+Q1
+import java.util.Scanner;
+
+abstract class Shape {
+    public abstract double calculateArea();
+}
+
+class Circle extends Shape {
+    private double radius;
+
+    public Circle(double radius) {
+        this.radius = radius;
+    }
+
+    @Override
+    public double calculateArea() {
+        return Math.PI * radius * radius;
+    }
+}
+
+class Rectangle extends Shape {
+    private double length;
+    private double breadth;
+
+    public Rectangle(double length, double breadth) {
+        this.length = length;
+        this.breadth = breadth;
+    }
+
+    @Override
+    public double calculateArea() {
+        return length * breadth;
+    }
+}
+
+class Triangle extends Shape {
+    private double base;
+    private double height;
+
+    public Triangle(double base, double height) {
+        this.base = base;
+        this.height = height;
+    }
+
+    @Override
+    public double calculateArea() {
+        return 0.5 * base * height;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Input for Circle
+        
+        double circleRadius = scanner.nextDouble();
+
+        // Input for Rectangle
+       
+        double rectangleLength = scanner.nextDouble();
+        
+        double rectangleBreadth = scanner.nextDouble();
+
+        // Input for Triangle
+        
+        double triangleBase = scanner.nextDouble();
+      
+        double triangleHeight = scanner.nextDouble();
+
+        // Creating instances
+        Shape circle = new Circle(circleRadius);
+        Shape rectangle = new Rectangle(rectangleLength, rectangleBreadth);
+        Shape triangle = new Triangle(triangleBase, triangleHeight);
+
+        // Calculating and printing areas
+        System.out.printf("Area of a Circle: %.2f%n", circle.calculateArea());
+        System.out.printf("Area of a Rectangle: %.2f%n", rectangle.calculateArea());
+        System.out.printf("Area of a Triangle: %.2f%n", triangle.calculateArea());
+
+        scanner.close();
+    }
+}
+Q2
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Step 1: Input the number of elements in the array
+        int input1 = scanner.nextInt();
+        scanner.nextLine(); // Consume the newline character after nextInt()
+
+        // Step 2: Input the string array
+        String[] input2 = new String[input1];
+        for (int i = 0; i < input1; i++) {
+            input2[i] = scanner.nextLine();
+        }
+
+        // Step 3: Process the strings to find matches
+        StringBuilder result = new StringBuilder();
+        for (String str : input2) {
+            if (!str.isEmpty()) {
+                char firstChar = Character.toLowerCase(str.charAt(0));
+                char lastChar = Character.toLowerCase(str.charAt(str.length() - 1));
+
+                if (isVowel(firstChar) && isVowel(lastChar)) {
+                    result.append(str.toLowerCase());
+                }
+            }
+        }
+
+        // Step 4: Output the result
+        if (result.length() > 0) {
+            System.out.println(result);
+        } else {
+            System.out.println("no matches found");
+        }
+
+        scanner.close();
+    }
+
+    // Helper method to check if a character is a vowel
+    private static boolean isVowel(char c) {
+        return "aeiou".indexOf(c) != -1;
+    }
+}
+Q3
+public class Main {
+    public static void main(String[] args) {
+        FinalExample example = new FinalExample();
+        System.out.println("The maximum speed is: " + example.MAX_SPEED + " km/h");
+
+        Subclass subclass = new Subclass();
+        subclass.displaySubclass();
+    }
+}
+
+class FinalExample {
+    public final int MAX_SPEED = 120;
+
+    public final void display() {
+        System.out.println("This is a final method.");
+    }
+}
+
+class Subclass extends FinalExample {
+    // Create a new method instead of overriding the final display() method
+    public void displaySubclass() {
+        System.out.println("This is a subclass of FinalExample.");
+    }
+}
