@@ -1,0 +1,62 @@
+//You have recently seen a motivational sports movie and want to start exercising regularly. Your coach tells you that it is important to get up early in the morning to exercise. She sets up a schedule for you:
+On weekdays (Monday - Friday), you have to get up at 5:00. On weekends (Saturday & Sunday), you can wake up at 6:00. However, if you are on vacation, then you can get up at 7:00 on weekdays and 9:00 on weekends.
+Write a program to print the time you should get up.
+Input Format
+Input containing an integer and a boolean value.
+The integer tells you the day it is (1-Sunday, 2-Monday, 3-Tuesday, 4-Wednesday, 5-Thursday, 6-Friday, 7-Saturday). The boolean is true if you are on vacation and false if you’re not on vacation.
+You have to print the time you should get up.//
+import java.util.Scanner;
+public class Wakeuptime
+{
+    public static String getWakeuptime(int day,boolean onvacation)
+    {
+        if(onvacation)
+        {
+            if(day==1||day==7)
+            {
+                return "9:00";
+            }
+            else{
+                return "7:00";
+            }
+        }
+        else{
+            if(day==1||day==7){
+                return "6:00";
+            }
+            else{
+                return "5:00";
+            }
+        }
+    }
+    public static void main(String args[]){
+        Scanner input=new Scanner(System.in);
+        int day=input.nextInt();
+        boolean onvacation=input.nextBoolean();
+        String wakeuptime=getWakeuptime(day,onvacation);
+        System.out.println(wakeuptime);
+    }
+}
+//Write a program that takes as parameter an integer n.
+You have to print the number of zeros at the end of the factorial of n.
+For example, 3! = 6. The number of zeros are 0. 5! = 120. The number of zeros at the end are 1.
+Note: n! < 10^5//
+import java.util.Scanner;
+public class TrailingZerosInFactorial
+{
+    public static int countTrailingZeros(int n)
+    {
+        int count=0;
+        for (int i = 5;n /i >=1;i*=5)
+        {
+            count+=n/i;
+        }
+        return count;
+    }
+    public static void main(String args[])
+    {
+        Scanner input=new Scanner(System.in);
+        int number=input.nextInt();
+        System.out.println(countTrailingZeros(number));
+    }
+}
