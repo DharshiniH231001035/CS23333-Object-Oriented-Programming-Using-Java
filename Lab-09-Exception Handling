@@ -1,0 +1,110 @@
+Q1
+import java.util.Scanner;
+
+public class ArrayDivisionExample {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        try {
+            // Reading the number of elements
+            int n = scanner.nextInt();
+            
+            // Creating the array with the given input
+            int[] array = new int[n];
+
+            for (int i = 0; i < n; i++) {
+                array[i] = scanner.nextInt();
+            }
+
+            // Attempting to divide the 0th element by the 1st element
+           // System.out.println("Trying to divide: " + array[0] + " / " + array[1]);
+            int result = array[0] / array[1]; // May throw ArithmeticException if array[1] is 0
+           // System.out.println("Result of division: " + result);
+
+            // Attempting to access the 3rd index
+            System.out.println("Trying to access index 3: " + array[3]);
+
+        } catch (ArithmeticException e) {
+            System.out.println("java.lang.ArithmeticException: / by zero");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("java.lang.ArrayIndexOutOfBoundsException: " + e.getMessage());
+        } finally {
+            System.out.println("I am always executed");
+        }
+
+        scanner.close();
+    }
+}
+Q2
+class OddNumberException extends Exception {
+    public OddNumberException(String message) {
+        super(message);
+    }
+}
+
+public class prog {
+
+    public static void main(String[] args) {
+        // First test with even number 82
+        try {
+            int n = 82;
+            tryNumber(n);
+        } catch (OddNumberException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+
+        // Second test with odd number 37
+        try {
+            int n = 37;
+            tryNumber(n);
+        } catch (OddNumberException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
+    // Method to check if the number is even or odd
+    public static void tryNumber(int n) throws OddNumberException {
+        if (n % 2 == 0) {
+            System.out.println(n + " is even.");
+        } else {
+            throw new OddNumberException(n + " is odd.");
+        }
+    }
+}
+Q3
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+public class ArrayInput {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        try {
+            // Take input for array size
+           // System.out.println("Enter the size of the array:");
+            int size = scanner.nextInt();
+
+            // Initialize the array
+            int[] numbers = new int[size];
+
+            //System.out.println(size );
+            int sum = 0;
+
+            // Take input for each element in the array
+            for (int i = 0; i < size; i++) {
+                numbers[i] = scanner.nextInt();
+                sum += numbers[i];
+            }
+
+            // If no exception, print the total sum
+            System.out.println(sum);
+
+        } catch (InputMismatchException e) {
+            // Handle non-integer input
+            System.out.println("You entered bad data.");
+        } finally {
+            // Closing the scanner to avoid resource leaks
+            scanner.close();
+        }
+    }
+}
