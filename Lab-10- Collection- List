@@ -1,0 +1,103 @@
+Q1
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Get the size of the ArrayList
+       
+        int n = scanner.nextInt();
+
+        // Initialize the ArrayList
+        ArrayList<Integer> list = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            list.add(scanner.nextInt());
+        }
+
+        // Print the ArrayList
+        System.out.println("ArrayList: " + list);
+
+        // Get and print the first and last elements
+        if (!list.isEmpty()) {
+            int first = list.get(0);
+            int last = list.get(list.size() - 1);
+            System.out.println("First : " + first + ", Last : " + last);
+        } else {
+            System.out.println("ArrayList is empty.");
+        }
+    }
+}
+Q2
+import java.util.ArrayList;
+import java.util.Scanner;
+
+class prog {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+
+        ArrayList<Integer> list = new ArrayList<>();
+
+        for (int i = 0; i < n; i++)
+            list.add(sc.nextInt());
+
+        // Printing initial ArrayList
+        System.out.println("ArrayList: " + list);
+
+        // Replacing the element at index 1 with 100
+        list.set(1, 100);
+
+        // Getting the index of first occurrence of 100
+        System.out.println("Index of 100 = " + list.indexOf(100));
+
+        // Getting the index of last occurrence of 100
+        System.out.println("LastIndex of 100 = " + list.lastIndexOf(100));
+
+        // Check whether 200 is in the list or not
+        System.out.println(list.contains(200));
+
+        // Print ArrayList size
+        System.out.println("Size Of ArrayList = " + list.size());
+
+        // Inserting 500 at index 1
+        list.add(1, 500);
+
+        // Removing an element from position 3
+        list.remove(3);
+
+        System.out.print("ArrayList: " + list);
+    }
+}
+Q3
+import java.util.ArrayList;
+import java.util.Collections; // Import required for reversing the list
+import java.util.Scanner; // Import Scanner for user input
+
+class prog {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // Reading the number of elements
+        int n = sc.nextInt();
+        sc.nextLine(); // Consume the newline character
+
+        // Creating the ArrayList
+        ArrayList<String> list = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            list.add(sc.nextLine());
+        }
+
+        // Display the list before reversing
+        System.out.println("List before reversing :");
+        System.out.println(list);
+
+        // Reverse the ArrayList
+        Collections.reverse(list);
+
+        // Display the list after reversing
+        System.out.println("List after reversing :");
+        System.out.println(list);
+    }
+}
